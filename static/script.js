@@ -41,7 +41,7 @@ async function enviarMensaje() {
         pdfCargado = true;
     }
 
-    const response = await fetch("/chat", {
+    const response = await fetch("https://rag-pdf-assistant-xeic.onrender.com/chat", {
         method: "POST",
         body: formData
     });
@@ -53,7 +53,7 @@ async function enviarMensaje() {
 
 btnReset.addEventListener("click", async () => {
 
-    await fetch("/reset", { method: "POST" });
+    await fetch("https://rag-pdf-assistant-xeic.onrender.com/reset", { method: "POST" });
     pdfCargado = false;
     archivoSeleccionado = null;
 
