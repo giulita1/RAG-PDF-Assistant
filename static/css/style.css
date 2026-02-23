@@ -1,0 +1,183 @@
+:root {
+  --bg-main: #F9F8F7;
+  --card: rgba(255, 255, 255, 0.65);
+  --primary: #3F3936;
+  --marroncito: #A69080;
+  --border: rgba(0, 0, 0, 0.06);
+  --glass: blur(20px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.app {
+  width: 100%;
+  max-width: 900px;
+}
+
+.chat-card {
+  background: var(--card);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+}
+
+.mensajes {
+  height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 10px;
+  margin-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+.mensajes::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mensajes::-webkit-scrollbar-thumb {
+  background-color: var(--marroncito); 
+  border-radius: 20px;
+  border: 2px solid var(--bg-main);
+}
+
+.user, .bot {
+  max-width: 70%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: fadeIn 0.25s ease;
+}
+
+.user {
+  align-self: flex-end;
+  background: rgba(166, 144, 128, 0.2);
+}
+
+.bot {
+  align-self: flex-start;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.container_enviar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  transition: 0.2s ease;
+}
+
+.container_enviar:focus-within {
+  border: 1px solid var(--marroncito);
+  box-shadow: 0 0 0 3px rgba(166, 144, 128, 0.15);
+}
+
+#input_chatear {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.pdf_input {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(166, 144, 128, 0.15);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.pdf_input:hover {
+  background: rgba(166, 144, 128, 0.3);
+}
+
+.btn_enviar {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn_enviar:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.btn_reset {
+    background: var(--primary);
+    color: var(--bg-main);
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.btn_reset:hover{
+  background: var(--marroncito);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(166, 144, 128, 0.2);
+
+}
+
+.btn_reset:active{
+  transform: translateY(0) scale(0.98);
+  transition: transform 0.1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
