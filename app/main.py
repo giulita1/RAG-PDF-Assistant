@@ -10,6 +10,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import tempfile
 import os
 
+MAX_SIZE = 10 * 10124 * 1024
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     os.makedirs("uploads", exist_ok=True)
@@ -33,12 +35,18 @@ async def serve_frontend():
 @app.post('/chat')
 async def chat(pregunta: str = Form(...),
                file: UploadFile = File(None)):
+    
+    
     try:
         if file:
             file_path = f"uploads/{file.filename}"
 
             with open(file_path, 'wb') as f:
                 content = await file.read()
+
+                if len(content) > MAX_SIZE:
+                    return { "error" : "File too large. Max 10MB allowed"}
+                
                 f.write(content)
 
                 procesar_subir_pdf(file_path)

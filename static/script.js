@@ -22,7 +22,7 @@ inputPregunta.addEventListener("keydown", function (e) {
 async function enviarMensaje() {
 
     if(!archivoSeleccionado && !pdfCargado){
-        alert("Primero cargá un PDF");
+        alert("Upload a PDF");
         return;
     }
 
@@ -40,7 +40,9 @@ async function enviarMensaje() {
         formData.append("file", archivoSeleccionado);
         pdfCargado = true;
     }
+    const mensajeCargando = agregarMensaje("Thinking...","bot");
 
+    try{
     const response = await fetch("https://rag-pdf-assistant-xeic.onrender.com/chat", {
         method: "POST",
         body: formData
@@ -48,7 +50,20 @@ async function enviarMensaje() {
 
     const data = await response.json();
 
-    agregarMensaje(data.answer, "bot");
+    if(!response.ok){
+        mensajeCargando.textContent = data.error || data.answer;
+        return;
+    }
+
+    if(data.error){
+        mensajeCargando.textContent=data.error;
+        return;
+    }
+
+    mensajeCargando.textContent = data.answer;
+}catch(error){
+    mensajeCargando.textContext = "Could not connect to the server";
+}
 }
 
 btnReset.addEventListener("click", async () => {
