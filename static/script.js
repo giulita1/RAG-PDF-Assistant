@@ -96,4 +96,6 @@ function agregarMensaje(texto, tipo){
 
     contenedor.scrollTop = contenedor.scrollHeight;
 
+    return mensaje;
+
 }
