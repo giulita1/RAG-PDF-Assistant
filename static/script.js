@@ -24,14 +24,14 @@ pdfInput.addEventListener("change", function () {
         return;
     }
 
-    if(file.size > 10 * 1024 * 1024){
+    if(archivo.size > 10 * 1024 * 1024){
         alert("File is too large: max 10MB");
         pdfInput.value = "";
         archivo = null;
         return;
     }
 
-   
+
     archivoSeleccionado = archivo; 
 
 });
