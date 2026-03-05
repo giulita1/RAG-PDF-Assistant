@@ -39,13 +39,17 @@ async def chat(pregunta: str = Form(...),
     
     try:
         if file:
+
+            if not file.filename.lower().endswith(".pdf"):
+                return JSONResponse(status_code=400, content={"error":"only PDF files are allowed "})
+            
             file_path = f"uploads/{file.filename}"
 
             with open(file_path, 'wb') as f:
                 content = await file.read()
 
                 if len(content) > MAX_SIZE:
-                    return { "error" : "File too large. Max 10MB allowed"}
+                    return JSONResponse(status_code=400, content={ "error" : "File too large. Max 10MB allowed"})
                 
                 f.write(content)
 

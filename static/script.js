@@ -1,5 +1,5 @@
-let pdfCargado = false;
 let archivoSeleccionado = null;
+let pdfCargado = false;
 
 const pdfInput = document.getElementById("pdf_input");
 const inputPregunta = document.getElementById("input_chatear");
@@ -7,7 +7,32 @@ const btnEnviar = document.getElementById("btn_enviar");
 const btnReset = document.getElementById("btn_reset");
 
 pdfInput.addEventListener("change", function () {
-    archivoSeleccionado = pdfInput.files[0];
+
+     if(pdfCargado){
+        alert("A PDF is already active. Reset to upload a new one");
+        pdfInput.value = "";
+        return;
+    }
+    
+    const archivo = pdfInput.files[0];
+    if(!archivo) return;
+
+    if(archivo.type !== 'application/pdf'){
+        alert("Please upload a PDF file.");
+        pdfInput.value = "";
+        archivo = null;
+        return;
+    }
+
+    if(file.size > 10 * 1024 * 1024){
+        alert("File is too large: max 10MB");
+        pdfInput.value = "";
+        archivo = null;
+        return;
+    }
+
+   
+    archivoSeleccionado = archivo; 
 
 });
 
@@ -36,9 +61,9 @@ async function enviarMensaje() {
 
     formData.append("pregunta", pregunta);
 
-    if (!pdfCargado && archivoSeleccionado) {
+    if (archivoSeleccionado) {
         formData.append("file", archivoSeleccionado);
-        pdfCargado = true;
+    
     }
     const mensajeCargando = agregarMensaje("Thinking...","bot");
 
@@ -53,6 +78,12 @@ async function enviarMensaje() {
     if(!response.ok){
         mensajeCargando.textContent = data.error || data.answer;
         return;
+    }
+
+    if(archivoSeleccionado){
+        pdfCargado = true;
+        archivoSeleccionado = null;
+        pdfInput.value = "";
     }
 
     if(data.error){
