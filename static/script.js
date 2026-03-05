@@ -62,7 +62,7 @@ async function enviarMensaje() {
 
     mensajeCargando.textContent = data.answer;
 }catch(error){
-    mensajeCargando.textContext = "Could not connect to the server";
+    mensajeCargando.textContent = "Could not connect to the server";
 }
 }
 
