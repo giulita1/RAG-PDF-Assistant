@@ -5,7 +5,7 @@ spark = SparkSession.builder \
     .appName("RAG Logs Analysis") \
     .getOrCreate()
 
-df = spark.read.json("../backend/rag_logs.json")
+df = spark.read.json("../rag_logs.json")
 
 print("Schema:")
 df.printSchema()
