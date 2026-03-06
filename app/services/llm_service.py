@@ -12,7 +12,7 @@ def get_llm():
     
     return llm
 
-def build_rag_chain(retriever):
+def build_rag_chain():
 
     llm = get_llm()
 
@@ -22,9 +22,7 @@ def build_rag_chain(retriever):
                                 Contexto: {context}
                                 Pregunta: {question}""")
     
-    rag_chain = ({"context":retriever,
-                  "question":RunnablePassthrough()} 
-                  | prompt | llm | StrOutputParser())
+    rag_chain = prompt | llm | StrOutputParser()
     
     return rag_chain
 

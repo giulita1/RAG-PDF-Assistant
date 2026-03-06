@@ -25,7 +25,7 @@ async def consultar_pinecone(pregunta):
 
     context = "\n".join([doc.page_content for doc in docs])
 
-    rag_chain = build_rag_chain()
+    rag_chain = build_rag_chain(retriever)
 
     respuesta = await rag_chain.ainvoke({
         "context": context,
