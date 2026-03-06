@@ -17,6 +17,8 @@ def build_rag_chain(retriever):
     llm = get_llm()
 
     prompt = ChatPromptTemplate.from_template("""Responde la pregunta usando solo el siguiente contexto.
+                                Si la respuesta no está en el contexto, responde: 
+                                "No tengo suficiente información en el contexto."
                                 Contexto: {context}
                                 Pregunta: {question}""")
     
