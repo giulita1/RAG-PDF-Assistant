@@ -1,6 +1,6 @@
 # RAG PDF Chat System
 
-This project is a high-performance **Retrieval-Augmented Generation (RAG)** system that allows users to upload a PDF document and interact with its content through natural language questions.
+This project is a **Retrieval-Augmented Generation (RAG)** system that allows users to upload a PDF document and interact with its content through natural language questions.
 
 The system processes the document, converts its text into vector embeddings, stores them in a vector database, and retrieves the most relevant information to generate accurate responses.
 
